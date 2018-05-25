@@ -13,11 +13,11 @@
 
     <title>
         
-          Echarts与平台系统模块化整合 - undefined
+          Git多账号配置详细介绍 - undefined
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/2018/05/24/2018-05-24-md/">
+    <link rel="canonical" href="http://yoursite.com/2018/05/25/Git多账号配置详细介绍/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -141,12 +141,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                          <a class="tag" href="/tags/#git" title="git">git</a>
+                        
                     </div>
-                    <h1>Echarts与平台系统模块化整合</h1>
+                    <h1>Git多账号配置详细介绍</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by TonyHau on
-                        2018-05-24
+                        2018-05-25
                     </span>
                 </div>
             </div>
@@ -165,7 +167,33 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="Echarts与平台系统模块化整合"><a href="#Echarts与平台系统模块化整合" class="headerlink" title="Echarts与平台系统模块化整合"></a>Echarts与平台系统模块化整合</h2><h3 id="加载workbench-js、workbench-jsp文件"><a href="#加载workbench-js、workbench-jsp文件" class="headerlink" title="#加载workbench.js、workbench.jsp文件"></a>#加载workbench.js、workbench.jsp文件</h3><p><img src="/img/1.jpg" alt="tupian"></p>
+                <h5 id="Git多账号配置详细介绍"><a href="#Git多账号配置详细介绍" class="headerlink" title="Git多账号配置详细介绍"></a>Git多账号配置详细介绍</h5><blockquote>
+<p>在开发的过程中(git管理)，经常会遇到这样的状况：在Github、Gitlab、Oschina等分别都有账户，为此我们需要为不同的账户生成不同的密钥，那对这些不同的账户和不同的密钥，我们该怎么处理呢？</p>
+</blockquote>
+<h3 id="一、如何生成ssh密钥"><a href="#一、如何生成ssh密钥" class="headerlink" title="一、如何生成ssh密钥"></a>一、如何生成ssh密钥</h3><h4 id="1-1-设置Git的user-name和user-email"><a href="#1-1-设置Git的user-name和user-email" class="headerlink" title="1.1 设置Git的user.name和user.email"></a>1.1 设置Git的user.name和user.email</h4><p>为了生成多账户，这里展示的局部的git配置，并不是全局的账户配置(全局配置：在config后面加上–list)。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//github账号</span><br><span class="line">$ git config user.name &quot;TonyHau&quot;</span><br><span class="line">$ git config user.email &quot;wangchaoxa@yeah.net&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-生成SSH密钥"><a href="#1-2-生成SSH密钥" class="headerlink" title="1.2 生成SSH密钥"></a>1.2 生成SSH密钥</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//github2账号</span><br><span class="line">$ ssh-keygen -t rsa -C “chaoilc@163.com”</span><br></pre></td></tr></table></figure>
+<p>文件命名后，按2次回车，密码为空。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in /c/Users/zlzsam/.ssh/github_id_rsa.</span><br><span class="line">Your public key has been saved in /c/Users/zlzsam/.ssh/github_id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:mRAluu98izlMRIQhaezphUvRHnkEH5HFm+aAX6wtXBU zlzsam@hotmail.com</span><br><span class="line">The key&apos;s randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">| ..ooBB*o E.     |</span><br><span class="line">|  =.=o++. .      |</span><br><span class="line">| o =.=o. +       |</span><br><span class="line">|  = +.o.Bo       |</span><br><span class="line">| o o.+ OS        |</span><br><span class="line">|  o  .* o        |</span><br><span class="line">|     o..         |</span><br><span class="line">|     ooo.        |</span><br><span class="line">|      =o..       |</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure>
+<p>将上面ssh密钥生成步骤重复一次，最后得到四个文件：github_id_rsa、github_id_rsa.pub和gitlab_id_rsa、gitlab_id_rsa.pub</p>
+<h3 id="二、多账号配置"><a href="#二、多账号配置" class="headerlink" title="二、多账号配置"></a>二、多账号配置</h3><p>在~/.ssh目录下，增加config配置文件(注：无后缀名)，配置规范如下(可配置多个git账号):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#Host host（Host简称，使用命令ssh host可连接远程服务器，如：ssh github）</span><br><span class="line">    #User/Email 登录用户名(如：zlzsam/zlzsam@hotmail.com)</span><br><span class="line">    #HostName 主机名用ip或域名，建议使用域名(如:github.com)</span><br><span class="line">    #Port 服务器open-ssh端口（默认：22,默认时一般不写此行</span><br><span class="line">    #IdentityFile 证书文件路径（如~/.ssh/id_rsa_*)</span><br></pre></td></tr></table></figure>
+<p>接下来，举个具体的栗子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#default github</span><br><span class="line">Host github.com</span><br><span class="line">  HostName github.com</span><br><span class="line">  IdentityFile ~/.ssh/wangchaoxa_id_rsa</span><br><span class="line"></span><br><span class="line">Host github_chaoilc</span><br><span class="line">  HostName github.com</span><br><span class="line">  IdentityFile ~/.ssh/chaoilc_id_rsa</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>以后提交时第二个仓库的地址：git@github_chaoilc:cilc/cilc.github.io.git</p>
+<p>git commit -m ‘’</p>
+</blockquote>
+<p>注意事项： </p>
+<ul>
+<li>在配置文件中的，IdentityFile文件位置是rsa私钥，不是.pub公钥 </li>
+<li>push代码的时候注意下，得check下本的user.name和user.email,若没有进行生成操作。建议最好设置一个全局的user.name和user.email,然后需要特定的配置的git仓库，就单独配置(当前配置查询命令:$<br> git config –list)</li>
+</ul>
+<h3 id="三、ssh-add增加新的私钥"><a href="#三、ssh-add增加新的私钥" class="headerlink" title="三、ssh-add增加新的私钥"></a>三、ssh-add增加新的私钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//github账号</span><br><span class="line">$ ssh-add ~/.ssh/github_id_rsa</span><br><span class="line"></span><br><span class="line">//gitlab账号</span><br><span class="line">$ ssh-add ~/.ssh/gitlab_id_rsa</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>该命令如果报错：Could not open a connection to your authentication agent.无法连接到ssh agent，可执行ssh-agent bash命令后再执行ssh-add命令。</p>
+</blockquote>
+<p>上面的配置完成完成，使用命令ssh-add -l可以看到所有的密钥列表,ssh-add的作用主要将密钥添加到 ssh-agent 的高速缓存中，这样在当前会话中就不需要再次输入密码了 </p>
+<p>具体的可以参考<a href="https://wiki.archlinux.org/index.php/SSH_keys_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener">SSH Keys</a></p>
 
 
                 <hr>
@@ -174,13 +202,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/05/25/Git多账号配置详细介绍/" data-toggle="tooltip" data-placement="top" title="Git多账号配置详细介绍">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/05/24/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello World">Next Post &rarr;</a>
+                            <a href="/2018/05/24/2018-05-24-md/" data-toggle="tooltip" data-placement="top" title="Echarts与平台系统模块化整合">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
